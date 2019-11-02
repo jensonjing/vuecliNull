@@ -10,7 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "lib-flexmobile": "^2.0.1",
     "vant": "^2.2.10",
     "vue": "^2.5.2",

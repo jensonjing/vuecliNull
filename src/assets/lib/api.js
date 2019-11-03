@@ -28,7 +28,7 @@ const obj = {
             console.log('请求前');
             return config;
         },error=>{
-            loadinginstace.close();//失败关闭加载窗
+            // loadinginstace.close();//失败关闭加载窗
             return Promise.reject(error);
         });
         if(type == 'get'){

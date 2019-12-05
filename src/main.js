@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router/index'
 import store from './store/index'
+import Bus from './store/bus';
 /*
 *如果有scss函数则不需要引入此js
 *使用：以iphone6尺寸为例。
@@ -20,6 +21,7 @@ import './assets/css/common.css'
 import Vant from 'vant';
 import 'vant/lib/index.css';
 Vue.use(Vant);
+Vue.use(Bus);
 
 //引入接口js文件
 import httpServe from './assets/lib/https.js'

@@ -11,6 +11,8 @@ import { utility } from '../lib/common.js'
 const obj = {
     getAxios:(type,url,params)=>{
         //axios的请求拦截器
+        axios.defaults.withCredentials=true;//允许携带cookie
+        //axios的请求拦截器
         axios.interceptors.request.use(config=>{
             //这里是请求前的操作，可以执行其它自定义任务，例如进行请求前的一些操作。
             //例如：在请求前有一个加载loading状态,这里借用element ui Loading方法
@@ -31,11 +33,11 @@ const obj = {
             // loadinginstace.close();//失败关闭加载窗
             return Promise.reject(error);
         });
-        if(type == 'get'){
+        if(type.toUpperCase()=='GET'||type.toUpperCase()=='DELETE'){
             params = utility.splitObj(params);
             return new Promise((resolve,reject)=>{
                 axios({
-                    method:'get',
+                    method:type,
                     url:config_data.http_url + url + params
                 }).then(response=>{
                     resolve(response)
@@ -43,14 +45,14 @@ const obj = {
                     reject(err)
                 });
             })
-        }else{
+        }else if(type.toUpperCase()=='POST'||type.toUpperCase()=='PUT'){
             return new Promise((resolve,reject)=>{
                 axios({
                     url: config_data.http_url + url,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                     },
-                    method:'post',
+                    method:type,
                     responseType: 'json',
                     data:qs.stringify(params)
                 }).then(response=>{
